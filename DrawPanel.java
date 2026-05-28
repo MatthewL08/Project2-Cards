@@ -80,6 +80,10 @@ class DrawPanel extends JPanel implements MouseListener {
             }
             xValue.clear();
             yValue.clear();
+            if (d.hasLost(cards) == true){
+                System.out.println("over");
+            }
+
         }
         else{
                 xValue.add((int) pointA.getX());

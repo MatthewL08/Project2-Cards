@@ -46,11 +46,24 @@ public class Deck {
             }
         }
 
+        int counter = 0;
+        for (int i = 0; i < intOfHand.size() - 1; i ++) {
+            for (int j = 1; j < intOfHand.size(); j++) {
+                if (intOfHand.get(i) + intOfHand.get(j) == 11) {
+                        return false;
+                }
+                else {
+                    if (intOfHand.get(i) == 0){
+                        counter++;
+                    }
+                }
+            }
+        }
 
+        if (counter >= 3){
+            return false;
+        }
 
-
-        return false;
+        return true;
     }
-
-
 }
