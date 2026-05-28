@@ -24,5 +24,33 @@ public class Deck {
         return deck;
     }
 
+    public boolean hasLost (Card[][] hand){
+        ArrayList<Integer> intOfHand = new ArrayList<>();
+        for (int i = 0; i < hand.length; i ++){
+            for (int j = 0; j < hand[0].length; j ++){
+                switch (hand[i][j].getValue()) {
+                    case "A" -> intOfHand.add(1);
+                    case "2" -> intOfHand.add(2);
+                    case "3" -> intOfHand.add(3);
+                    case "4" -> intOfHand.add(4);
+                    case "5" -> intOfHand.add(5);
+                    case "6" -> intOfHand.add(6);
+                    case "7" -> intOfHand.add(7);
+                    case "8" -> intOfHand.add(8);
+                    case "9" -> intOfHand.add(9);
+                    case "10" -> intOfHand.add(10);
+                    case "J" -> intOfHand.add(0);
+                    case "Q" -> intOfHand.add(0);
+                    case "K" -> intOfHand.add(0);
+                }
+            }
+        }
+
+
+
+
+        return false;
+    }
+
 
 }

@@ -13,13 +13,13 @@ class DrawPanel extends JPanel implements MouseListener {
     private Card[][] cards;
     private ArrayList<Point> points;
     private ArrayList<Integer> button;
-    private Rectangle reset = new Rectangle(300, 10,150 , 65);
+    private Rectangle replace = new Rectangle(300, 10,150 , 65);
+    private Rectangle reset = new Rectangle(300, 210,150 , 65);
     private ArrayList<Integer> xValue = new ArrayList<>();
     private ArrayList<Integer> yValue = new ArrayList<>();
 
 
     public DrawPanel() {
-
         cards = new Card[3][3];
         d = new Deck();
         for (int r = 0; r < cards.length; r++) {
@@ -50,41 +50,43 @@ class DrawPanel extends JPanel implements MouseListener {
 
         g.drawString("Number of cards left: " + d.getDeck().size(), x, y + 100);
         g.drawRect(300, 10, 150,65);
+        g.drawRect(300, 210, 150,65);
 
 
     }
 
     public void mousePressed(MouseEvent e) {
 
-
-        Point p = e.getPoint();
+        Point pointA = e.getPoint();
         int button = e.getButton();
 
-        System.out.println(p);
-
-        if (reset.contains(p)) {
-            for (int r = 0; r < cards.length; r++) {
-                for (int c = 0; c < cards.length; c++) {
-                    if (d.getDeck().size() != 0 && (button == 1 || button == 3)) {
-                        if (cards[r][c].getHitbox().contains(p)) {
-                            cards[r][c] = d.getRandomCard();
+        if (replace.contains(pointA)) {
+            for (int l = 0; l < xValue.size(); l++) {
+                Point p = new Point(xValue.get(l), yValue.get(l));
+                for (int r = 0; r < cards.length; r++) {
+                    for (int c = 0; c < cards.length; c++) {
+                        if (d.getDeck().size() != 0 && (button == 1 || button == 3)) {
+                            if (cards[r][c].getHitbox().contains(p)) {
+                                cards[r][c] = d.getRandomCard();
+                            }
                         }
-                    }
 
-                    if (button == 3 && cards[r][c].getHitbox().contains(p)) {
-                        cards[r][c].flipHighlight();
-                        ;
+                        if (button == 3 && cards[r][c].getHitbox().contains(p)) {
+                            cards[r][c].flipHighlight();
+
+                        }
                     }
                 }
             }
             xValue.clear();
             yValue.clear();
         }
-        else {
-            xValue.add((int) p.getX());
-            yValue.add((int) p.getY());
+        else{
+                xValue.add((int) pointA.getX());
+                yValue.add((int) pointA.getY());
+            }
         }
-    }
+
 
     public void mouseReleased(MouseEvent e) { }
     public void mouseEntered(MouseEvent e) { }
